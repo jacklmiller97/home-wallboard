@@ -25,10 +25,7 @@ const widgets: Widgets[] = [
 	},
 	{
 		type : "WeatherWidget",
-		data : `<a class="weatherwidget-io" href="https://forecast7.com/en/27d75n82d63/saint-petersburg/" data-label_1="ST. PETERSBURG" data-label_2="WEATHER" data-theme="original" >ST. PETERSBURG WEATHER</a>
-				<script>
-				!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-				</script>`,
+		data : `<div style="display: flex; justify-content: center; padding: 1rem 0;"><a class="weatherwidget-io" style="width: 90%" href="https://forecast7.com/en/27d75n82d63/saint-petersburg/?unit=us" data-label_1="ST. PETERSBURG" data-label_2="WEATHER" data-font="Roboto" data-icons="Climacons Animated" data-textcolor="#ffffff" >ST. PETERSBURG WEATHER</a> </div>`,
 		row : "2",
 		column : "1 / -1",
 	}
@@ -77,6 +74,10 @@ function renderWidgets() {
 
 		grid.append(doc.body.firstChild);
 	});
+
+	function renderWeather(d:any,s:any,id:any){debugger; var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);};
+
+	renderWeather(document,'script','weatherwidget-io-js');
 
 	setTimeout(renderWidgets, 1000 * 60 * 10);
 }
