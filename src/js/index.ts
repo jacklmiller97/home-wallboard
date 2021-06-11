@@ -19,7 +19,7 @@ interface Widgets {
 const widgets: Widgets[] = [
 	{
 		type   : "CalendarWidget",
-		data  : `<div style="display: flex; justify-content:center;"><iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=aDYxY3E0NWw2ZnF0OXB0cnFrN25nZG1hcWNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23009688&amp;color=%23009688&amp;mode=MONTH&amp;showTitle=0&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0" style="border:solid 1px #777" width="90%" height="500" frameborder="0" scrolling="no"></iframe></div>`,
+		data  : `<div style="display: flex; justify-content:center;"><iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=aDYxY3E0NWw2ZnF0OXB0cnFrN25nZG1hcWNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23009688&amp;color=%23009688&amp;mode=MONTH&amp;showTitle=0&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0" style="border:solid 1px #777" width="90%" height="500" frameborder="0" scrolling="no"></iframe></div>`,
 		row    : "1",
 		column : "1 / -1",
 	},
@@ -27,7 +27,13 @@ const widgets: Widgets[] = [
 		type : "WeatherWidget",
 		data : `<div style="display: flex; justify-content: center; padding: 1rem 0;"><a class="weatherwidget-io" style="width: 90%" href="https://forecast7.com/en/27d75n82d63/saint-petersburg/?unit=us" data-label_1="ST. PETERSBURG" data-label_2="WEATHER" data-font="Roboto" data-icons="Climacons Animated" data-textcolor="#ffffff" >ST. PETERSBURG WEATHER</a> </div>`,
 		row : "2",
-		column : "1 / -1",
+		column : "1 / 2",
+	},
+	{
+		type : "WeatherWidget",
+		data : `<div style="display: flex; justify-content: center; padding: 1rem 0;"><a class="weatherwidget-io" style="width: 90%" href="https://forecast7.com/en/39d68n75d75/newark/?unit=us" data-label_1="NEWARK" data-label_2="WEATHER" data-font="Roboto" data-icons="Climacons Animated" data-textcolor="#ffffff" >NEWARK WEATHER</a></div>`,
+		row : "2",
+		column : "2 / 3",
 	}
 ];
 
@@ -75,9 +81,18 @@ function renderWidgets() {
 		grid.append(doc.body.firstChild);
 	});
 
-	function renderWeather(d:any,s:any,id:any){debugger; var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);};
+	function renderWeather(d:any,s:any,id:any){
+		var js,
+		fjs    = d.getElementsByTagName(s)[0],
+		js     = d.createElement(s);
 
-	renderWeather(document,'script','weatherwidget-io-js');
+		js.id  = id;
+		js.src = 'https://weatherwidget.io/js/widget.min.js';
+		fjs.parentNode.insertBefore(js,fjs);
+		debugger;
+	};
+
+	renderWeather(document,'script','weatherwidget-io');
 
 	setTimeout(renderWidgets, 1000 * 60 * 10);
 }
