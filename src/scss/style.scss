@@ -2,10 +2,11 @@
 
 html, body {
 	height          : 100vh;
-	font-family     : 'Roboto', sans-serif;
+	font-family     : 'Roboto',                                             sans-serif;
 	color           : white;
 	background      : linear-gradient(to bottom, transparent 0%,black 35%), url('../img/wallpapers/starry_night.jpg') no-repeat;
 	background-size : cover;
+	overflow        : hidden;
 }
 
 .header {
@@ -40,4 +41,19 @@ html, body {
 	display               : grid;
 	grid-template-rows    : auto;
 	grid-template-columns : 50vw 50vw;
+}
+
+.alert {
+	position            : absolute;
+	top                 : 0;
+	left                : 0;
+	z-index             : 99999;
+	width               : 300px;
+	height              : 300px;
+	background          : white;
+	color               : black;
+	border              : 1px solid black;
+	background          : url("https://scontent.ftpa1-1.fna.fbcdn.net/v/t31.18172-8/472774_10201191728543630_885908929_o.jpg?_nc_cat=109&ccb=1-5&_nc_sid=2c4854&_nc_ohc=QYuHVmUT_OUAX8wtYSS&_nc_ht=scontent.ftpa1-1.fna&oh=9ad1de35da9ba24daa6335764ca56ed9&oe=6182D2E2");
+	background-size     : cover;
+	background-position : center;
 }

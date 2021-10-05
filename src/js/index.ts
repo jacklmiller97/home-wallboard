@@ -89,12 +89,74 @@ function renderWidgets() {
 		js.id  = id;
 		js.src = 'https://weatherwidget.io/js/widget.min.js';
 		fjs.parentNode.insertBefore(js,fjs);
-		debugger;
 	};
 
 	renderWeather(document,'script','weatherwidget-io');
 
 	setTimeout(renderWidgets, 1000 * 60 * 10);
+}
+
+function alert(content : string) {
+	const alert   = `<div class="alert" data-right data-down>${content}</div>`;
+	let element = (new DOMParser).parseFromString(alert, "text/html");
+
+	if (!element || !element.body.firstChild){
+		return;
+	}
+
+	const node = element.body.firstChild;
+
+	document.body.append(node);
+}
+
+function animateAlerts() {
+	const alerts = document.querySelectorAll('.alert');
+
+	alerts.forEach((alert) => {
+		const alertElement = alert as HTMLElement;
+		const boundingBox  = alertElement.getBoundingClientRect();
+		let   newLeft      = boundingBox.left;
+		let   newTop       = boundingBox.top;
+
+		if (boundingBox.top < 0) {
+			alertElement.removeAttribute('data-up')
+			alertElement.setAttribute('data-down', '');
+		}
+
+		if (boundingBox.left < 0) {
+			alertElement.removeAttribute('data-left')
+			alertElement.setAttribute('data-right', '');
+		}
+
+		if (boundingBox.right > (window.innerWidth || document.documentElement.clientWidth)) {
+			alertElement.removeAttribute('data-right')
+			alertElement.setAttribute('data-left', '');
+		}
+
+		if (boundingBox.bottom > (window.innerHeight || document.documentElement.clientHeight)) {
+			alertElement.removeAttribute('data-down')
+			alertElement.setAttribute('data-up', '');
+		}
+
+		if (alertElement.hasAttribute('data-right')) {
+			newLeft += 3;
+		}
+		else if (alertElement.hasAttribute('data-left')) {
+			newLeft -= 5;
+		}
+
+		if (alertElement.hasAttribute('data-down')) {
+			newTop += 2;
+		}
+		else if (alertElement.hasAttribute('data-up')) {
+			newTop -= 6;
+		}
+
+		alertElement.style.left = `${newLeft}px`;
+		alertElement.style.top  = `${newTop}px`;
+	});
+
+	setTimeout(animateAlerts, 10);
 }
 
 function refreshDateTime() {
@@ -150,4 +212,5 @@ function refreshDateTime() {
 document.addEventListener("DOMContentLoaded", function(event) {
 	refreshDateTime();
 	renderWidgets();
+	animateAlerts();
 });
